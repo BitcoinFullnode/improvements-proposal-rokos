@@ -1,0 +1,330 @@
+version v01 = 5/5/2016, v02 = 6/5/2016
+--------------------------------------
+
+To everyone: I am not affiliated with ROKOS - I am just a poweruser :-)
+             If you like this, you can show it:  [BTC] 16d2Q2LpmtsfPKkJKtRBFPiZ44W29RGc7K
+
+
+
+---------------------
+ROKOS = Great system!
+---------------------
+
+Looks pretty, 
+is easy to use, and 
+reduced to the really important aspects. 
+
+Kudos - you have done a great job!
+
+The following are many small suggestions - you might want to pile some of them onto your TODO stack. 
+And perhaps even announce bounties for solving some of these questions?
+
+
+
+Syncing
+-------
+
+Over night, I had tried to sync 4 wallets (DASH, MUE, SOIL, HZ). But while DASH and MUE only synced 10794 and 10457 blocks, HZ got relatively far: In those ~9 hours the HZ chain is ~40% synced now. (Next experiments I will sequentially sync, not several coins at a time.)
+
+--> If the above is really the case (do some comparative testing), then a hint 'sync sequentially' gets into a 'rokos-manual.pdf'
+
+
+Syncing via bootstrap.dat
+-------------------------
+Many (not all) older coins -those with huge blockchains- are providing a bootstrap.dat file, which can cut down the syncing time from 6 days to 6 hours. 
+
+Perhaps you could work out a scheme 
+    e.g.: kill wallet, cd, wget bootstrap.zip, unzip, rm .zip, start wallet
+and then send your script to the ~20 coin devs to please comply with it, or send you a modification which would work. 
+
+Then introduce one more subfolder "Start ... Wallets ... Bootstrap-sync ... Dash" (with the same icons), with which the user can call each of those 20 scripts. 
+
+Plus one more "remove all bootstrap source files from all coin folders".
+Plus a chapter in the 'rokos-manual.pdf' to explain.
+
+
+
+HoriZon
+-------
+
+About the Horizon Server - please try to somehow rename its "LXTerminal" to "Horizon Server".
+Then it is easier to find it again when I want to see its logging - or to shut it down (Ctrl-C). 
+
+Perhaps perhaps ... that needs to be done in the java that is called? Then perhaps contact the HZ team?
+
+
+
+SOIL server
+-----------
+
+is starting, but then not syncing - it might need a manual/scripted 'addnode', or a newer code version with startnodes included.
+
+
+
+Manuals 
+-------
+
+When the system booted up, of course first I simply followed the instructions on the screen (which does not mention to login as root at first start). Only later then I discovered the:  '"ROKOS" Initial Setup' in http://rokos.space/rokos_flavors.html
+
+If you put id="initial" on your website into
+<div id="initial" align="center"><strong>"ROKOS" Initial Setup</strong></div>
+
+Then you can link to  http://rokos.space/rokos_flavors.html#initial
+
+Also ... put a link to '_ROKOS' == 'http://rokos.space/' on the desktop, and/or into the 'Wallets' menu, see below.
+
+
+
+Additionally I would create a supershort TXT file, and show it after boot:
+
+STEPS:
+1-    Login with username: root  /Password: raspberry ...
+2-    Login with username: root and the password you just set. ...
+3-    Login with your normal user account: user: pi  and the password you ...
+3.1- Type:  "startx"   to start the user desktop.
+
+Or show a "first-steps.sh" command - which then prints this short instructions manual.
+
+
+Oh wow, accidentially just found this:
+    /home/pi/1.- Readme.txt
+sorry for not looking longer  :-)
+
+Suggestion:  Put a link on the desktop, one click == readme-first.txt  (or readme-first.pdf for nicer formatting).
+
+
+
+
+Long term
+---------
+
+... you might want to create a simple GUI tool - for all ROKOS functions. 
+
+First version allows to input all the initial decisions, and sets keyboard language (kezboard first because of :) Wireless password, root password, pi password, timezone, expands filesystem, etc.  
+
+In a second version then, the below external-harddisk option.
+
+If you are not into coding, just offer a bounty - and I am sure someone can build s.th. nice for you.
+
+
+
+One main usability improvement:
+
+Immediate 'startx', even after first boot. Much easier for total Newbies - many of who are afraid of CLIs.
+
+
+
+blockchains better not on SD
+----------------------------
+
+> Blockchains on different directory (Like USB devices)
+> Every cryptocurrency comes with a ****.conf  file 
+> under their own folders at: /home/pi/.currency
+> To select a different location to store your blockchain, 
+> uncomment the like with DATADIR and select your proper directory.
+
+But that would mean -and also for newbies- to edit 19 config files?
+One day you'll have 50 wallets in ROKOS. So I would go for a different approach:
+
+
+
+Solution 1: (fast, quick, as a workaround for soon soon):
+
+You/Someone write/s a shell script which 'sed's all of those 19 confs in one go.
+
+
+
+Solution 2 (probably better): Mount home folder from HD. 
+
+Provide the following script: 
+
+1 copy all of /home/pi/ to /home/pi_backup/
+
+2 mount an external USB-harddisk at a repetable mountpoint
+   e.g. /mnt/Seagate-1TB/   (i.e. not /media/usb0/ because next time might be different)
+
+3 create a folder /mnt/Seagate-1TB/rokos/pi/ on the external USB disk as input
+4 copy all of /home/pi_backup/ into /mnt/Seagate-1TB/rokos/pi/
+
+5 delete the (SD-card)  /home/pi/ directory contents
+6 mount the new folder  /mnt/Seagate-1TB/rokos/pi/  at  /home/pi/
+
+
+
+Solution 3 (perhaps best): Leave /home/pi/ and user 'pi' intact, unchanged as it is.
+
+Programmatically create a new user 'hd' - for which the above "Solution 2" is default, right from the start.
+
+Then I will always login as 'hd' AFTER I have plugged in my external harddisk - and all is cool.
+
+And I can still login as 'pi', for other stuff/emergencies, etc.
+
+
+
+Anyways ... from that moment on, ALL of my home folder, incl. blockchains, wallets, Desktop, Downloads, etc. - will be living on the magnetic harddisk, which is built to withstand hyperfrequent writing much better than an SD card. And updating to a newer ROKOS v8 will become supereasy.
+
+
+
+
+Desktop usability
+-----------------
+
+* Some "unmount USB stick" graphical tool would be nice.
+
+* Where is a graphical editor for the .desktop menu elements?
+   (hint: Found only a manual way - see below)
+
+* Put all wallets into separate menu 'Wallets' - not into 'Internet'!
+
+
+
+Wallets into separate menu 'Wallets'
+------------------------------------
+
+I have found out how to do that, manually:
+
+
+sudo nano /etc/xdg/menus/lxde-applications.menu
+insert e.g. below <!-- End Internet--> this block here:
+
+       <!-- Wallets -->
+        <Menu>
+                <Name>Wallets</Name>
+                <Directory>lxde-wallets.directory</Directory>
+                <Include>
+                        <And>
+                                <Category>Wallets</Category>
+                        </And>
+                </Include>
+        </Menu>  <!-- End Wallets-->
+
+
+sudo nano /usr/share/desktop-directories/lxde-wallets.directory
+
+    [Desktop Entry]
+    Name=Wallets
+    Comment=All installed Wallet Binaries
+    Icon=applications-internet
+    Type=Directory
+
+
+sudo nano /usr/share/applications/dash.desktop
+
+    Categories=Wallets;
+
+lxpanelctl restart
+
+
+Same, for all of them:
+
+
+# move ALL of them into category 'Wallets'. First backup old:
+cd /usr/share/
+sudo cp -R applications applications_backup
+cd applications
+
+# testing:
+sudo sed -i 's/Categories=Network;/Categories=Wallets;/g' bigup.desktop 
+ls | grep -e coin -e cash -e credits -e horizon -e expanse -e monetary -e obazaar -e soil -e transfer -e diamond -e dash -e bigup 
+
+# do all in one go:
+sudo sed -i 's/Categories=Network;/Categories=Wallets;/g' $(ls | grep -e coin -e cash -e credits -e horizon -e expanse -e monetary -e obazaar -e soil -e transfer -e diamond -e dash -e bigup )
+
+check results:
+cat $(ls | grep -e coin -e cash -e credits -e horizon -e expanse -e monetary -e obazaar -e soil -e transfer -e diamond -e dash -e bigup )
+
+lxpanelctl restart
+
+
+
+
+Security
+--------
+
+
+only newest versions are ~safe:
+
+    sudo apt-get update && sudo apt-get -y upgrade
+
+
+(how) are the wallet binaries/sourcs auto-updated regularly?
+
+
+
+close down firewall, at the moment it is wide open 
+(but perhaps better pay a security expert!)
+
+    sudo iptables -S
+      -P INPUT ACCEPT
+      -P FORWARD ACCEPT
+      -P OUTPUT ACCEPT
+
+
+
+trust improving:
+
+  * complete log 
+  * of all your changes, and of all files that were changed by you
+  * starting from official Linux image that you used as input
+  * because ... I need to be able to fully trust the ROKOS system 
+
+
+encrypted filesystem
+  * SD card could be stolen / lost.
+  * See bitcointalk posts linked below.
+
+
+
+
+Linux usability
+---------------
+
+
+search:
+    sudo updatedb
+now I can search for any file:
+    locate run.sh
+    locate Dash
+
+
+Need to repair manpages:
+    man kill
+      No manual entry for kill
+      See 'man 7 undocumented' for help when manual pages are not available.
+
+
+some useful tools:
+
+sudo apt-get update && sudo apt-get install -y tree lynx dos2unix grc slurm gparted
+
+
+
+
+Multiboot, encrypted filesystem
+-------------------------------
+
+See https://bitcointalk.org/index.php?topic=1084908.msg15068067#msg15068067
+and https://bitcointalk.org/index.php?topic=1084908.msg15081145#msg15081145
+
+
+
+
+This is fun - happy to help more
+--------------------------------
+
+I really really like your system - please do not misunderstand the above as criticism, but as implicit praise: 
+If I didn't believe in what you are doing, I would now not have put so much time into making good suggestions.
+
+Personally I think it is a pretty bad idea to use our (www browsing, emailing, gaming) daily computers ... for our coins. Most will even be windows machines. There are too many attack vectors, for to elevate such an insecure system to be "my own bank" (few would appreciate if banksters played DOOM, or read their trojan-infected emails, on the central mainframe which keeps our bank account database, right?). And ROKOS is one of the great solutions to this question - for less than 100 dollars (rpi3 plus small external HD), I can buy a complete separate system - only for my coins. I love it.
+
+I am determined to incorporate ROKOS into my crypto workflow, and I will probably have more ideas. Will keep you posted.
+
+
+To everyone: I am not affiliated with ROKOS - I am just a poweruser :-)
+
+             If you like this, you can show it:  [BTC] 16d2Q2LpmtsfPKkJKtRBFPiZ44W29RGc7K
+
+
+
+Enjoy your ROKOS!
+
