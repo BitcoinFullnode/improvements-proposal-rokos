@@ -2,6 +2,8 @@
 AltSheets' suggestions for the great http://rokos.space
 
 * many suggestions: [ROKOS_firstuse-experiences_altsheets.txt](ROKOS_firstuse-experiences_altsheets.txt)
+  * [SOIL-addPeers.js](SOIL-addPeers.js)
+  * [lxpanel_newCategory.txt](lxpanel_newCategory.txt)
 * links to some of my posts: [ROKOS_altsheetsPosts.md](ROKOS_altsheetsPosts.md)
 
 

@@ -1,0 +1,64 @@
+See 'ROKOS_firstuse-experiences_altsheets.txt' --> Desktop usability
+
+
+Wallets into separate menu 'Wallets'
+------------------------------------
+
+I have found out how to do that, manually:
+
+
+sudo nano /etc/xdg/menus/lxde-applications.menu
+insert e.g. below <!-- End Internet--> this block here:
+
+       <!-- Wallets -->
+        <Menu>
+                <Name>Wallets</Name>
+                <Directory>lxde-wallets.directory</Directory>
+                <Include>
+                        <And>
+                                <Category>Wallets</Category>
+                        </And>
+                </Include>
+        </Menu>  <!-- End Wallets-->
+
+
+sudo nano /usr/share/desktop-directories/lxde-wallets.directory
+
+    [Desktop Entry]
+    Name=Wallets
+    Comment=All installed Wallet Binaries
+    Icon=applications-internet
+    Type=Directory
+
+
+sudo nano /usr/share/applications/dash.desktop
+
+    Categories=Wallets;
+
+lxpanelctl restart
+
+
+Same, for all of them:
+
+
+# move ALL of them into category 'Wallets'. First backup old:
+cd /usr/share/
+sudo cp -R applications applications_backup
+cd applications
+
+# testing:
+sudo sed -i 's/Categories=Network;/Categories=Wallets;/g' bigup.desktop 
+ls | grep -e coin -e cash -e credits -e horizon -e expanse -e monetary -e obazaar -e soil -e transfer -e diamond -e dash -e bigup 
+
+# do all in one go:
+sudo sed -i 's/Categories=Network;/Categories=Wallets;/g' $(ls | grep -e coin -e cash -e credits -e horizon -e expanse -e monetary -e obazaar -e soil -e transfer -e diamond -e dash -e bigup )
+
+check results:
+cat $(ls | grep -e coin -e cash -e credits -e horizon -e expanse -e monetary -e obazaar -e soil -e transfer -e diamond -e dash -e bigup )
+
+lxpanelctl restart
+
+
+
+---
+If you like this, you can show it:  [BTC] 16d2Q2LpmtsfPKkJKtRBFPiZ44W29RGc7K
