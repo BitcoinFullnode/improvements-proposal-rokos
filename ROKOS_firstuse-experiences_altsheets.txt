@@ -270,7 +270,7 @@ trust improving:
 
 
 encrypted filesystem
-  * SD card could be stolen / lost.
+  * SD card, and/or harddisk could be stolen / lost.
   * See bitcointalk posts linked below.
 
 
