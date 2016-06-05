@@ -1,5 +1,5 @@
-version v01 = 5/5/2016, v02 = 6/5/2016
---------------------------------------
+version v01 = 5/5/2016, v02 = 6/5/2016, v03 = 6/5/2016 
+------------------------------------------------------
 
 To everyone: I am not affiliated with ROKOS - I am just a poweruser :-)
              If you like this, you can show it:  [BTC] 16d2Q2LpmtsfPKkJKtRBFPiZ44W29RGc7K
@@ -57,7 +57,7 @@ Perhaps perhaps ... that needs to be done in the java that is called? Then perha
 SOIL server
 -----------
 
-is starting, but then not syncing - it might need a manual/scripted 'addnode', or a newer code version with startnodes included.
+is starting, but then not syncing - please see the 'SOIL-addPeers.js' script to fix that.
 
 
 
